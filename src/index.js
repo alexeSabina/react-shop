@@ -17,7 +17,7 @@ function ProductImg() {
   return <img src={defaultImg} alt="not-found" className="item__img"/>;
 }
 
-class Product extends React.Component {  
+class Product extends React.Component {
   render() {
     return (
       <div className="item">
