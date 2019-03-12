@@ -31,8 +31,8 @@ class Product extends React.Component {
 }
 
 class ProductsList extends React.Component {
-  renderProduct(i) {
-    return <Product value={i}/>
+  renderProduct(name) {
+    return <Product value={name}/>
   }
 
   render() {
