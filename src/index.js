@@ -6,9 +6,13 @@ const defaultImg = require('./assets/not-found.png');
 
 
 class Search extends React.Component {
+  handleInputChange(e) {
+    console.log(e.target.value);
+  }
+
   render() {
     return (
-      <input className="search" placeholder="Search" value={this.props.value} />
+      <input className="search" placeholder="Search" value={this.props.value} onChange={this.handleInputChange}/>
     );
   }
 }
