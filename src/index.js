@@ -6,9 +6,13 @@ const defaultImg = require('./assets/not-found.png');
 
 
 class Search extends React.Component {
+  handleInputChange(e) {
+    console.log(e.target.value);
+  }
+
   render() {
     return (
-      <input className="search" placeholder="Search" value={this.props.value} />
+      <input className="search" placeholder="Search" value={this.props.value} onChange={this.handleInputChange}/>
     );
   }
 }
@@ -17,7 +21,7 @@ function ProductImg() {
   return <img src={defaultImg} alt="not-found" className="item__img"/>;
 }
 
-class Product extends React.Component {  
+class Product extends React.Component {
   render() {
     return (
       <div className="item">
@@ -31,8 +35,8 @@ class Product extends React.Component {
 }
 
 class ProductsList extends React.Component {
-  renderProduct(i) {
-    return <Product value={i}/>
+  renderProduct(name) {
+    return <Product value={name}/>
   }
 
   render() {
