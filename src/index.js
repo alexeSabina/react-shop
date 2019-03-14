@@ -4,80 +4,91 @@ import './index.css';
 
 const defaultImg = require('./assets/not-found.png');
 
-
-class Search extends React.Component {
-  handleInputChange(e) {
-    console.log(e.target.value);
-  }
-
-  render() {
-    return (
-      <input className="search" placeholder="Search" value={this.props.value} onChange={this.handleInputChange}/>
-    );
-  }
-}
-
-function ProductImg() {
-  return <img src={defaultImg} alt="not-found" className="item__img"/>;
-}
-
-class Product extends React.Component {
-  render() {
-    return (
-      <div className="item">
-        <ProductImg />
-        <span className="item__name">
-          {this.props.value}
-        </span>
-      </div>
-    );
-  }
-}
-
-class ProductsList extends React.Component {
-  renderProduct(name) {
-    return <Product value={name}/>
-  }
-
-  render() {
-    return (
-      <div className="content">
-        {this.renderProduct("Casti")}
-        {this.renderProduct("Laptop")}
-        {this.renderProduct("Tablou")}
-        {this.renderProduct("Roti")}
-        {this.renderProduct("Frigider")}
-        {this.renderProduct("Ventilator")}
-        {this.renderProduct("Ciocan")}
-        {this.renderProduct("Cuier")}
-      </div>
-    );
-  }
-}
-
 class Shop extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchProd: ""
+    }
+  }
+  handleChange = (e) => {
+    this.setState({
+      searchProd: e.target.value
+    })
+  }
   render() {
+    var prod = this.props.items,
+        searchProd = this.state.searchProd.trim().toLowerCase();
+    if(searchProd.length > 0) {
+      prod = prod.filter(function(i) {
+        return i.name.toLowerCase().match(searchProd);
+      });
+    }
     return (
       <div className="container">
         <div className="container__head">
           <span className="title">JunkYard</span>
-          <Search />
+          <input type="text" className="search" value={this.state.searchProd} onChange={this.handleChange} placeholder="Search" />
         </div>
 
         <div className="container__list">
-          <ProductsList />
+          <div className="content">
+            {prod.map(function(i) {
+                return (
+                  <div className="item">
+                    <img src={defaultImg} alt="not-found" className="item__img"/>
+                     <span className="item__name">{i.name}</span>
+                     <span className="item__price">{i.price}</span>
+                  </div>
+                )
+            })}
+          </div>
         </div>
       </div>
     );
   }
 }
 
-
+// Product
+const prod = [{
+  "id": 1,
+  "name" : "Casti",
+  "price": "80 RON"
+}, {
+"id": 2,
+"name" : "Laptop",
+"price": "4500 RON"
+}, {
+  "id": 3,
+  "name" : "Tablou",
+  "price": "100 RON"
+}, {
+  "id": 4,
+  "name" : "Roti",
+  "price": "500 RON"
+}, {
+  "id": 5,
+  "name" : "Frigider",
+  "price": "400 RON"
+}, {
+  "id": 6,
+  "name" : "Ventilator",
+  "price": "50 RON"
+}, {
+  "id": 7,
+  "name" : "Ciocan",
+  "price": "5 RON"
+}, {
+  "id": 8,
+  "name" : "Cuier",
+  "price": "120 RON"
+}
+];
 
 
 // ========================================
 
 ReactDOM.render(
-  <Shop />,
+  <Shop items={prod} />,
   document.getElementById('root')
 );
