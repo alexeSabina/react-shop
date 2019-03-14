@@ -6,7 +6,6 @@ body {
 .container {
   width: 100%;
   max-width: 1024px;
-  height: 100vh;
   margin: 0 auto;
   background: #fbfbfb;
 }
@@ -42,9 +41,27 @@ body {
   padding: 10px;
   color: #fff;
 }
+.item span {
+  display: inline-block;
+  vertical-align: middle;
+}
 .item__img {
   width: 100%;
+  margin-bottom: 8px;
 }
 .item__name {
   font-size: 18px;
+  padding-right: 24px;
+  position: relative;
+}
+.item__name:after {
+  content: "-";
+  display: inline-block;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translate(0px, -53%);
+}
+.item__price {
+  font-size: 20px;
 }
